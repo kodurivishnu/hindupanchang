@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="src/panchang.js"></script>
+
+<script type="text/javascript">
+    var datefield=document.createElement("input")
+    datefield.setAttribute("type", "date")
+    if (datefield.type!="date"){ //if browser doesn't support input type="date", load files for jQuery UI Date Picker
+        document.write('<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
+        document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"><\/script>\n')
+        document.write('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"><\/script>\n') 
+    }
+</script>
+
+<script>
+if (datefield.type!="date"){ //if browser doesn't support input type="date", initialize date picker widget:
+    jQuery(function($){ //on document.ready
+        $('#date1').datepicker();
+    })
+}
+</script>
+
+	<title>Panchang Application</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+	<style type="text/css">
+		.panel{
+			padding: 10px;
+			background-color: #868e96;
+				margin: 15px;
+		}
+		.jumbotron{
+			border-radius :15px;
+			padding-top: 10px;
+			margin-bottom: 30px;
+			margin-top: 15px;
+		}
+		.card-body{
+			margin: 15px;
+		}
+		.social{
+			display: inline-block;
+			padding-right: 130px;
+			padding-left: 130px; 
+		}
+		.social-div{
+			color: #868e96;
+		}
+		.fa{
+			color: #868e96;
+		}
+		.button {
+	 		padding: 8px 40px ;
+	  		font-size: 15px;
+	  		font-style: Monospace;
+		  text-align: center;
+		  cursor: pointer;
+		  outline: none;
+		  color: #fff;
+		  
+		  background-color: #FA8072;
+		  border: none;
+		  border-radius: 20px;
+		  box-shadow: 0 9px #999;
+}
+.text-class
+{
+		
+	  		font-size: 14px;
+	  		font-style: Monospace;
+		  text-align: center;
+
+
+}
+
+.button:hover {background-color: #008080}
+
+.button:active {
+  background-color: #008080
+  box-shadow: 0 5px #666;
+  transform: translateY(10px);
+}
+		.zodiac
+		{
+			
+			border-radius: 10px;
+			border-color: Orange;
+			width:140px;
+			height:120px;
+			border-width: 2px;
+			border-style: solid;
+			margin-left:10px;
+			margin-right: 15px;
+			
+		}
+		h6{
+		font-family:Sans-serif;
+		font-style: italic;
+		font-color:blue;
+		font-weight:bold;
+		}
+		.arange {
+    -webkit-columns: 100px 1; /* Chrome, Safari, Opera */
+    -moz-columns: 100px 1; /* Firefox */
+    columns: 100px 1;
+}
+		.space
+		{
+			word-spacing: 15px;
+			padding-left: 25px;
+			margin-left: 25px;
+			font-size: 20px
+		}
+		.spacing
+		{
+			margin-bottom: 20px;
+
+		}
+
+	</style>
+</head>
+<body background="green.jpg">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <h1><strong><a class="navbar-brand">Hindu Panchang Application</a></strong></h1>
+	  
+	  
+	</nav>
+
+	<div class="container-fluid">
+
+		<div class="jumbotron jumbotron-fluid">
+		  <div class="container">
+		  	<div align="center">
+		    	<div>
+			    	<h3>Enter Date:</h3>
+			    	<!-- <input class="text-class" type="datetime-local" id="date1"> -->
+					<input class="text-class" type="date" id="date1" placeholder="mm/dd/yyyy">
+				</div>
+				<div>
+				<h3 font="monospace">Enter Year:</h3>
+				
+				<input class="text-class" style="background-color: 	#E8E8E8" type="text" id="text1" placeholder="YYYY">
+				</div>
+				<br>
+				<button id="button" class="button" onclick="myCalculate()"> Submit </button> 
+				
+		    </div>
+		    	  
+				  
+			</div>
+		</div>
+	</div>
+
+
+	<div class="card text-center">
+	  <div class="card-header">
+	  	<h4>Date Details</h4>
+	  </div>
+	</div>
+	
+	<div class="card text-left spacing">
+				  
+	   <div class="card-body">
+				    
+		<div class="card text-left">
+				  
+				  <div class="card-body">
+
+
+
+				  	<h4><p id="val1" style="color: #DC143C"></p></h4>
+					    <div class="card-text row" align="left"><b col sm-4>Day:</b> <p  id='day' style="color:#FF1493;  font-weight: 500; font-family: sans-serif;" class="card-text col sm-8"></p></div>
+					    <div class="card-text row" align="left"><b col sm-4>Tithi: </b><p id='tithi' style="color:#FF1493;  font-weight: 500; font-family: sans-serif;" class="card-text col sm-8"></p></div>
+					    <div class="card-text row" align="left"><b col sm-4>Nakshatra:</b><p id='nakshtra' style="color:#FF1493;  font-weight: 500; font-family: sans-serif;" class="card-text sm-8"></p></div>
+					    <div class="card-text row" align="left"><b col sm-4>Karna: </b><p id='karna' style="color:#FF1493;  font-weight: 500; font-family: sans-serif;" class="card-text col sm-8"></p></div>
+					    <div class="card-text row" align="left"><b col sm-4>Yoga: </b><p id='yoga' style="color:#FF1493;  font-weight: 500; font-family: sans-serif;" class="card-text col sm-8"></p></div>
+					    <div class="card-text row" align="left"><b col sm-4>Raasi: </b><p id='raasi' style="color:#FF1493;  font-weight: 500; font-family: sans-serif;" class="card-text col sm-8"></p></div>
+					    <div class="card-text row" align="left"><b col sm-4>Ayanamsa:</b><p id='ayanamsa' style="color:#FF1493;  font-weight: 500; font-family: sans-serif;" class="card-text col sm-8"></p></div>
+
+				   
+					
+		</div>
+	  </div>
+	</div>
+		</div>
+
+
+		<div class="card text-center">
+				  <div class="card-header">
+				    <h4>Year Details</h4>
+				  </div>
+				  </div>
+				<div class="card text-left spacing">
+				  
+				  <div class="card-body">
+				    <div class="card text-left ">
+
+
+				  <div class="card-body">
+				  	<h4><p id="val" style="color: #DC143C"></p></h4>
+					    <div class="card-text row" align="left"><b col sm-4>Day:</b> <p  id='day1' style="color:#FF1493;  font-weight: 500; font-family: sans-serif;" class="card-text col sm-8"></p></div>
+					    <div class="card-text row" align="left"><b col sm-4>Tithi: </b><p id='tithi1' style="color:#FF1493;  font-weight: 500; font-family: sans-serif;" class="card-text col sm-8"></p></div>
+					    <div class="card-text row" align="left"><b col sm-4>Nakshatra:</b><p id='nakshtra1' style="color:#FF1493;  font-weight: 500; font-family: sans-serif;" class="card-text sm-8"></p></div>
+					    <div class="card-text row" align="left"><b col sm-4>Karna: </b><p id='karna1' style="color:#FF1493;  font-weight: 500; font-family: sans-serif;" class="card-text col sm-8"></p></div>
+					    <div class="card-text row" align="left"><b col sm-4>Yoga: </b><p id='yoga1' style="color:#FF1493;  font-weight: 500; font-family: sans-serif;" class="card-text col sm-8"></p></div>
+					    <div class="card-text row" align="left"><b col sm-4>Raasi: </b><p id='raasi1' style="color:#FF1493;  font-weight: 500; font-family: sans-serif;" class="card-text col sm-8"></p></div>
+					    <div class="card-text row" align="left"><b col sm-4>Ayanamsa:</b><p id='ayanamsa1' style="color:#FF1493;  font-weight: 500; font-family: sans-serif;" class="card-text col sm-8"></p></div>
+				    
+					
+				  </div>
+
+
+				</div>
+			</div>
+		</div>
+
+		<div class="card text-left">
+			<div class="panel panel-default" >
+				  <div class="panel-body text-center" style="background-color: #FA8072">Designed by APKV</div>
+			</div>
+		</div>
+			
+<script>
+
+	$("#date1").keyup(function(event) {
+		    if (event.keyCode === 13) {
+		        $("#button").click();
+		    }
+		});
+		  $("#text1").keyup(function(event) {
+	    if (event.keyCode === 13) {
+	        $("#button").click();
+	    }
+	});			
+
+  function myCalculate()
+  {
+	var x = document.getElementById("date1").value;
+	var t=new Date(x);
+	var ao=new Date(x);
+	var year2=ao.getFullYear();
+	var year3=year2.toString();
+	console.log(year3);
+	var len1=year3.length;
+	console.log(len1);
+	if(!x)
+	{
+		myText1();
+		document.getElementById("val1").innerHTML= "You did not enter Date/ Year Format YYYY";	
+	}
+	else if(len1==4)
+	{
+		//console.log("Inside len1 if");
+	document.getElementById("val1").innerHTML= " ";
+	panchang.calculate(t, function() {
+    document.getElementById("day").innerHTML=panchang.Day.name;
+    document.getElementById("tithi").innerHTML=panchang.Tithi.name;
+    document.getElementById("nakshtra").innerHTML=panchang.Nakshatra.name;
+    document.getElementById("karna").innerHTML=panchang.Karna.name;
+    document.getElementById("yoga").innerHTML=panchang.Yoga.name;
+    document.getElementById("raasi").innerHTML=panchang.Raasi.name;
+    document.getElementById("ayanamsa").innerHTML=panchang.Ayanamsa.name;
+  });
+}
+	else
+	{
+		myText1();
+		document.getElementById("val1").innerHTML= "Given Year is Wrong.. Format of Year is YYYY";
+	}
+
+
+	var y=document.getElementById("text1").value;
+	var p=t.setYear(y);
+	console.log("set year");
+	var a=new Date(p);
+	console.log(p);
+	//var str = new String(y);
+	//console.log(str);
+	//console.log(str.length);
+	console.log(y.length);
+	var len=y.length;
+	var k=y;
+	var year1=ao.getFullYear();
+	var day1 = ao.getDate();
+	var mon=ao.getMonth()+1;
+	console.log(day1);
+	console.log(year1);
+	if(!y)
+	{
+			myText();
+			document.getElementById("val").innerHTML= "Year/Date Was not Given";
+	}
+	else
+	{
+		if(/^[0-9]{1,10}$/.test(+y))
+		{	
+		if(len==4)
+		{
+				if(!x)
+				{
+							myText();
+							document.getElementById("val").innerHTML= "Date Not Given Please Enter Date";	
+				}
+				else
+				{
+					if ((((year1 % 4 == 0) && (year1 % 100 != 0)) || (year1 % 400 == 0)) && (day1==29 && mon==2))
+					{
+						console.log("Inside First if");
+						if (((k % 4 == 0) && (k % 100 != 0)) || (k % 400 == 0))
+						{
+							//console.log("Inside second if");
+							document.getElementById("val").innerHTML= " ";	
+							panchang1.calculate(a, function() {
+						    document.getElementById("day1").innerHTML=panchang1.Day.name;
+						    document.getElementById("tithi1").innerHTML=panchang1.Tithi.name;
+						    document.getElementById("nakshtra1").innerHTML=panchang1.Nakshatra.name;
+						    document.getElementById("karna1").innerHTML=panchang1.Karna.name;
+						    document.getElementById("yoga1").innerHTML=panchang1.Yoga.name;
+						    document.getElementById("raasi1").innerHTML=panchang1.Raasi.name;
+						    document.getElementById("ayanamsa1").innerHTML=panchang1.Ayanamsa.name;
+						  });
+						}
+
+						else
+						{
+							console.log("Inside else");
+							document.getElementById("val").innerHTML= "Given Year is not Leap So cannot calculate";	
+							myText();	
+						}
+					// else
+					// {document.getElementById("val").innerHTML= "Given Year is Leap";
+					// 	panchang1.calculate(a, function() {
+					//     document.getElementById("day1").innerHTML=panchang1.Day.name;
+					//     document.getElementById("tithi1").innerHTML=panchang1.Tithi.name;
+					//     document.getElementById("nakshtra1").innerHTML=panchang1.Nakshatra.name;
+					//     document.getElementById("karna1").innerHTML=panchang1.Karna.name;
+					//     document.getElementById("yoga1").innerHTML=panchang1.Yoga.name;
+					//     document.getElementById("raasi1").innerHTML=panchang1.Raasi.name;
+					//     document.getElementById("ayanamsa1").innerHTML=panchang1.Ayanamsa.name;
+					//   });
+					}
+					else
+					{
+
+							document.getElementById("val").innerHTML= " ";
+							panchang1.calculate(a, function() {
+						    document.getElementById("day1").innerHTML=panchang1.Day.name;
+						    document.getElementById("tithi1").innerHTML=panchang1.Tithi.name;
+						    document.getElementById("nakshtra1").innerHTML=panchang1.Nakshatra.name;
+						    document.getElementById("karna1").innerHTML=panchang1.Karna.name;
+						    document.getElementById("yoga1").innerHTML=panchang1.Yoga.name;
+						    document.getElementById("raasi1").innerHTML=panchang1.Raasi.name;
+						    document.getElementById("ayanamsa1").innerHTML=panchang1.Ayanamsa.name;
+						  });
+					}
+				}
+		}
+		else
+	{
+				
+		myText();
+
+		document.getElementById("val").innerHTML= "Year length is Wrong";
+	}
+	}
+
+		else
+		{
+			document.getElementById("val").innerHTML= "Given Format is wrong Enter only numbers in YYYY Format";		
+			myText();
+		}
+	}
+
+// if (/^[0-9]{1,10}$/.test(+y)) // OR if (/^[0-9]{1,10}$/.test(+tempVal) && tempVal.length<=10) 
+//   console.log("given value is number");
+// else
+//   console.log("Given value is not number");
+}
+function myText()
+{
+							document.getElementById("day1").innerHTML=" ";
+						    document.getElementById("tithi1").innerHTML=" ";
+						    document.getElementById("nakshtra1").innerHTML=" ";
+						    document.getElementById("karna1").innerHTML=" ";
+						    document.getElementById("yoga1").innerHTML=" ";
+						    document.getElementById("raasi1").innerHTML=" ";
+						    document.getElementById("ayanamsa1").innerHTML=" ";	
+							
+}
+function myText1()
+{
+							document.getElementById("day").innerHTML=" ";
+						    document.getElementById("tithi").innerHTML=" ";
+						    document.getElementById("nakshtra").innerHTML=" ";
+						    document.getElementById("karna").innerHTML=" ";
+						    document.getElementById("yoga").innerHTML=" ";
+						    document.getElementById("raasi").innerHTML=" ";
+						    document.getElementById("ayanamsa").innerHTML=" ";	
+
+}
+</script>
+
+	</body>
+</html>
